@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('meta')
     <title> مدیریت حساب کاربری </title>

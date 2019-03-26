@@ -143,7 +143,7 @@
 body {
     direction: rtl;
     text-align: right;
-    font-family: 'Nunito', 'Lalezar', 'Mirza';
+    font-family: 'Nunito', 'Lalezar';
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -160,7 +160,6 @@ h5,
 h6 {
     color: #3d405c;
     margin: 0px 0px 15px 0px;
-    font-family: 'Circular Std Medium';
 }
 
 h1 {

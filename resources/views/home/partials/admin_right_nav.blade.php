@@ -16,10 +16,10 @@
                         <div id="submenu-2" class="collapse px-0 submenu" style="">
                             <ul class="nav flex-column pr-4">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"> <i class="fa fa-fw fa-list"></i> لیست مشتریان </a>
+                                    <a class="nav-link" href="{{url('customers')}}"> <i class="fa fa-fw fa-list"></i> لیست مشتریان </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"> <i class="fa fa-fw fa-user-plus"></i> اضافه کردن مشتری </a>
+                                    <a class="nav-link" href="{{url('customers/create')}}"> <i class="fa fa-fw fa-user-plus"></i> اضافه کردن مشتری </a>
                                 </li>
                             </ul>
                         </div>

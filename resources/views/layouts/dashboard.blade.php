@@ -10,19 +10,19 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Mirza|Lalezar" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lalezar" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+    <link href="{{asset('assets/vendor/fonts/circular-std/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/vendor/fonts/fontawesome/css/fontawesome-all.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/charts/chartist-bundle/chartist.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/charts/morris-bundle/morris.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/charts/c3charts/c3.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
 
-    <link rel="stylesheet" href="assets/libs/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/libs/css/style.css')}}">
 
 </head>
 
@@ -56,7 +56,9 @@
                                         <div class="list-group">
                                             <a href="#" class="list-group-item list-group-item-action active">
                                                 <div class="notification-info">
-                                                    <div class="notification-list-user-img"><img src="assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-img">
+                                                        <img src="assets/images/avatar-2.jpg" alt="" class="user-avatar-md rounded-circle">
+                                                    </div>
                                                     <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
                                                         <div class="notification-date">2 min ago</div>
                                                     </div>
@@ -127,15 +129,22 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                            </a>
                             <div class="dropdown-menu text-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Abraham </h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
+                                    <h5 class="mb-0 text-white nav-user-name"> {{auth()->user()->name}} </h5>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user ml-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog ml-2"></i>Setting</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off ml-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{url('acc')}}">
+                                    <i class="fas fa-user ml-2"></i> مدیریت حساب کاربری
+                                </a>
+                                <a class="dropdown-item" href="javascript:void" onclick="document.getElementById('logout-form').submit()">
+                                    <i class="fas fa-power-off ml-2"></i> خروج
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </ul>
@@ -173,25 +182,25 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="{{asset('assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
     <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
     <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="{{asset('assets/vendor/slimscroll/jquery.slimscroll.js')}}"></script>
     <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
+    <script src="{{asset('assets/libs/js/main-js.js')}}"></script>
     <!-- chart chartist js -->
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <script src="{{asset('assets/vendor/charts/chartist-bundle/chartist.min.js')}}"></script>
     <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="{{asset('assets/vendor/charts/sparkline/jquery.sparkline.js')}}"></script>
     <!-- morris js -->
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
+    <script src="{{asset('assets/vendor/charts/morris-bundle/raphael.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/charts/morris-bundle/morris.js')}}"></script>
     <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="{{asset('assets/vendor/charts/c3charts/c3.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
+    <script src="{{asset('assets/libs/js/dashboard-ecommerce.js')}}"></script>
 </body>
 
 </html>
