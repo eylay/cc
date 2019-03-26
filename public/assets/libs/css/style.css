@@ -3549,6 +3549,7 @@ btn-link
 
 .popover {
     border: 1px solid rgb(230, 230, 242);
+    font-family: 'Yekan';
 }
 
 .bs-popover-auto[x-placement^=right] .arrow::before,

@@ -29,7 +29,19 @@
                             <a href="{{url("customers/$customer->id/edit")}}" class="btn btn-outline-success"> ویرایش </a>
                         </td>
                         <td align="center">
-                            <a href="#" class="btn btn-outline-danger"> حذف </a>
+                            <form action="{{url("customers/$customer->id")}}" method="post" id="delete-customer-{{$customer->id}}">
+                                @csrf
+                                @method("DELETE")
+                                <button type="button" class="btn btn-outline-danger" data-toggle="popover" data-placement="top" data-title="آیا مطمئن هستید؟" data-html="true" data-trigger="focus" tabindex="0"
+                                data-content='
+                                    <div class="p-3">
+                                        <button type="submit" form="delete-customer-{{$customer->id}}" class="btn btn-success mx-1"> بلی </button>
+                                        <button type="button" class="btn btn-danger mx-1"> خیر </button>
+                                    </div>
+                                '>
+                                    حذف
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
