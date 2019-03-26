@@ -35,7 +35,7 @@ return [
     'date_equals' => 'The :attribute must be a date equal to :date.',
     'date_format' => 'The :attribute does not match the format :format.',
     'different' => 'The :attribute and :other must be different.',
-    'digits' => 'The :attribute must be :digits digits.',
+    'digits' => ':attribute باید دقیقا :digits کاراکتر باشد.',
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
@@ -78,7 +78,7 @@ return [
     'max' => [
         'numeric' => 'The :attribute may not be greater than :max.',
         'file' => 'The :attribute may not be greater than :max kilobytes.',
-        'string' => 'The :attribute may not be greater than :max characters.',
+        'string' => ':attribute باید حداکثر :max کاراکتر باشد.',
         'array' => 'The :attribute may not have more than :max items.',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
@@ -86,7 +86,7 @@ return [
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'string' => ':attribute باید حداقل :min کاراکتر باشد.',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'not_in' => 'The selected :attribute is invalid.',
@@ -147,6 +147,9 @@ return [
     'attributes' => [
         'mobile' => 'موبایل',
         'password' => 'رمز عبور',
+        'name' => 'نام',
+        'new_password' => 'رمز عبور جدید',
+        'current_password' => 'رمز عبور فعلی',
     ],
 
 ];
