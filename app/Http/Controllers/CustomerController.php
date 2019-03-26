@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $customers = Customer::latest()->paginate(25);
@@ -17,18 +23,14 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view('customers.create');
+        $customer = new Customer;
+        return view('customers.create', compact('customer'));
     }
 
     public function store(Request $request)
     {
         // ولیدیت کردن اطلاعات فرم
-        $request->validate([
-            'name' => 'required|string|min:3|max:200',
-            'mobile' => 'required|string|digits:11|unique:users,mobile',
-            'birthday' => 'nullable',
-            'male' => 'nullable',
-        ]);
+        self::validation();
 
         // ایجاد حساب کاربری برای مشتری
         $password = rand(10000000, 99999999);
@@ -59,16 +61,37 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.create', compact('customer'));
     }
 
     public function update(Request $request, Customer $customer)
     {
-        //
+        $user = $customer->user;
+        self::validation($user->id);
+        $user->update([
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+        ]);
+        if ($request->male !== null) {
+            $data['male'] = $request->male;
+        }
+        $data['birthday'] = shamsi_to_miladi($request->birthday);
+        $customer->update($data);
+        return back()->withMessage("مشتری مورد نظر ویرایش شد.");
     }
 
     public function destroy(Customer $customer)
     {
         //
+    }
+
+    public static function validation($user_id=0)
+    {
+        return request()->validate([
+            'name' => 'required|string|min:3|max:200',
+            'mobile' => 'required|string|digits:11|unique:users,mobile,'.$user_id,
+            'birthday' => 'nullable',
+            'male' => 'nullable',
+        ]);
     }
 }

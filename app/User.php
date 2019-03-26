@@ -40,6 +40,7 @@ class User extends Authenticatable
         $user->name = $name;
         $user->mobile = $mobile;
         $user->password = bcrypt($password);
+        $user->mobile_verified_at = now();
         $user->save();
         return $user;
     }

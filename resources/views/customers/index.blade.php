@@ -25,8 +25,12 @@
                         <td> {{$customer->code}} </td>
                         <td> {{$customer->gender()}} </td>
                         <td> {{print_date($customer->birthday)}} </td>
-                        <td align="center"> <a href="#" class="btn btn-outline-success"> ویرایش </a> </td>
-                        <td align="center"> <a href="#" class="btn btn-outline-danger"> حذف </a> </td>
+                        <td align="center">
+                            <a href="{{url("customers/$customer->id/edit")}}" class="btn btn-outline-success"> ویرایش </a>
+                        </td>
+                        <td align="center">
+                            <a href="#" class="btn btn-outline-danger"> حذف </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
