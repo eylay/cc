@@ -1,3 +1,5 @@
 body {
-    font-family: 'Lalezar', 'Mirza', 'Nunito';
+    direction: rtl;
+    text-align: right;
+    font-family: 'Nunito', 'Lalezar', 'Mirza';
 }
