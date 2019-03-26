@@ -33,4 +33,14 @@ class User extends Authenticatable
         $this->password = bcrypt($string);
         $this->save();
     }
+
+    public static function new_user($name, $mobile, $password)
+    {
+        $user = new self;
+        $user->name = $name;
+        $user->mobile = $mobile;
+        $user->password = bcrypt($password);
+        $user->save();
+        return $user;
+    }
 }

@@ -10,7 +10,7 @@ class TextMessageController extends Controller
     public static function send($mobile, $body)
     {
         // TODO: send the text message
-        
+
         TextMessage::create([
             'mobile' => $mobile,
             'body' => $body,
