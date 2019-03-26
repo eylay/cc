@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'nullable|string|min:3|max:200',
-            'mobile' => 'nullable|string|digits:11',
+            'mobile' => 'nullable|string|digits:11|unique:users,mobile,'. $user->id,
             'new_password' => 'nullable|string|min:8|max:40',
             'current_password' => 'required',
         ]);

@@ -51,6 +51,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right text-right" aria-labelledby="navbarDropdown">
 
+                                    <a href="{{route('home')}}" class="dropdown-item"> داشبورد </a>
                                     <a href="{{route('acc')}}" class="dropdown-item"> مدیریت حساب کاربری </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
