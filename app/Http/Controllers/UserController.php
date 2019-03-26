@@ -20,14 +20,46 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|min:3|max:200',
-            'mobile' => 'required|string|digits:11',
+        $user = auth()->user();
+
+        $request->validate([
+            'name' => 'nullable|string|min:3|max:200',
+            'mobile' => 'nullable|string|digits:11',
             'new_password' => 'nullable|string|min:8|max:40',
             'current_password' => 'required',
         ]);
 
-        
+
+        if (\Hash::check($request->current_password, $user->password)) {
+
+            $loguot = false;
+
+            if ($request->name) {
+                $data ['name']= $request->name;
+            }
+            if ($request->mobile) {
+                $loguot = true;
+                $data ['mobile']= $request->mobile;
+                $user->unverify_mobile();
+            }
+            if ($request->new_password) {
+                $loguot = true;
+                $data['password'] = bcrypt($request->new_password);
+            }
+
+            $user->update($data);
+
+            $message = 'مشخصات شما با موفقیت ویرایش شد.';
+            if ($loguot) {
+                \Auth::logout();
+                return redirect('login')->withMessage($message);
+            }else {
+                return back()->withMessage($message);
+            }
+
+        }else {
+            return back()->withErrors(['رمز عبور فعلی اشتباه است.'])->withInput();
+        }
 
     }
 }

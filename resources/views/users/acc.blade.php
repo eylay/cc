@@ -7,21 +7,26 @@
 @section('content')
     <div class="card card-body">
 
-        <h2 class="text-primary"> مدیریت حساب کاربری </h2>
+        <h2 class="text-primary mb-3"> مدیریت حساب کاربری </h2>
+        <div class="alert alert-info">
+            <b> نام فعلی شما : {{$user->name}} </b>
+            <br>
+            <b> موبایل فعلی شما : {{$user->mobile}} </b>
+        </div>
         <hr>
 
         <form class="row" action="{{url('acc')}}" method="post">
             @csrf
             <div class="form-group col-md-4">
-                <label for="name"> نام </label>
-                <input type="text" class="form-control" name="name" id="name" value="{{old('name') ?? $user->name}}">
+                <label for="name"> تغییر نام </label>
+                <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}">
             </div>
             <div class="form-group col-md-4">
-                <label for="mobile"> موبایل </label>
-                <input type="text" class="form-control" name="mobile" id="mobile" value="{{old('mobile') ?? $user->mobile}}">
+                <label for="mobile"> تغییر موبایل </label>
+                <input type="text" class="form-control" name="mobile" id="mobile" value="{{old('mobile')}}">
             </div>
             <div class="form-group col-md-4">
-                <label for="new-password"> رمز عبور </label>
+                <label for="new-password"> رمز عبور جدید </label>
                 <input type="password" class="form-control" name="new_password" id="new-password">
             </div>
             <div class="w-100"></div>
