@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('meta')
-
+    <title> ثبت مشتری جدید </title>
 @endsection
 @section('content')
     <div class="card card-body">

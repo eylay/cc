@@ -133,6 +133,15 @@
 
 
 /* ==========================================================================
+   0. INCLUDE FONTS
+   ========================================================================== */
+
+   @font-face {
+       src: url(../../../fonts/Yekan.woff);
+       font-family: 'Yekan';
+   }
+
+/* ==========================================================================
    0. ELEMENT
    ========================================================================== */
 
@@ -143,7 +152,7 @@
 body {
     direction: rtl;
     text-align: right;
-    font-family: 'Nunito', 'Lalezar';
+    font-family: 'Nunito','Yekan';
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -4220,6 +4229,10 @@ Pills vertical
 2.14 Pagination
 -------------------------*/
 
+.center-pagination .pagination {
+    justify-content: center;
+}
+
 .page-link {
     position: relative;
     display: block;
@@ -4595,7 +4608,6 @@ Pills vertical
 .table thead th,
 .table th {
     color: #3d405c;
-    font-family: 'Circular Std Medium';
 }
 
 .table-bordered {
