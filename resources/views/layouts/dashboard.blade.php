@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/charts/c3charts/c3.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/fonts/flag-icon-css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-select/css/bootstrap-select.css')}}">
     <link rel="stylesheet" href="{{asset('css/pdp.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/libs/css/style.css')}}">
@@ -202,6 +203,8 @@
     <script src="{{asset('assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
     <script src="{{asset('assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
     <script src="{{asset('assets/libs/js/dashboard-ecommerce.js')}}"></script>
+
+    <script src="{{asset('assets/vendor/bootstrap-select/js/bootstrap-select.js')}}"></script>
 
     <script src="{{asset('js/pdp.js')}}"></script>
     <script src="{{asset('js/dashboard.js')}}"></script>

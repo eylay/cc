@@ -7075,6 +7075,24 @@ Media Query
 }
 
 
+/* Over writing */
+.dropdown-toggle::after {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0.5rem;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option {
+    text-align: right;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option-inner {
+    padding-right: 0;
+}
+
+
 /* Custom, iPhone Retina */
 
 @media only screen and (max-width:320px) {}
