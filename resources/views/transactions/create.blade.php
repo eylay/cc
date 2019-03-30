@@ -36,22 +36,22 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="service"> نام محصول یا خدمات </label>
-                                <input type="text" name="service" value="{{old('service')}}" id="service" class="form-control mt-2">
+                                <input type="text" name="service[]" value="{{old('service')}}" id="service" class="form-control mt-2">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="amount"> قیمت اولیه (به تومان)</label>
-                                <input type="number" name="amount" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2">
+                                <input type="number" name="amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="cash-discount"> تخفیف نقدی </label>
-                                <input type="number" name="cash_discount" value="{{old('cash_discount') ?? 0}}" id="cash-discount" class="form-control cash-discount mt-2">
+                                <input type="number" name="cash_discount[]" value="{{old('cash_discount') ?? 0}}" id="cash-discount" class="form-control cash-discount mt-2">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="count"> تعداد </label>
-                                <input type="number" name="count" value="{{old('count') ?? 1}}" id="count" class="form-control count mt-2">
+                                <input type="number" name="count[]" value="{{old('count') ?? 1}}" id="count" class="form-control count mt-2">
                             </div>
 
                             <div class="form-group col-md-2 align-self-end">
@@ -94,6 +94,13 @@
                     </div>
 
                     <hr class="w-100">
+
+                    <div class="hidden-inputs" class="hidden">
+                        {{-- will be updated via jquery --}}
+                        <input type="hidden" class="club-discount" name="club_discount[]" value="0">
+                        <input type="hidden" class="payable-amount" name="payable_amount[]" value="0">
+                        <input type="hidden" class="gift-amount" name="gift_amount[]" value="0">
+                    </div>
                 </div>
             </div>
 
@@ -101,6 +108,27 @@
                 <div class="col-md-2 mx-auto">
                     <button type="submit" class="btn btn-primary btn-block"> ثبت تراکنش </button>
                 </div>
+            </div>
+
+            <div class="fixed-bottom p-1 bg-dark hidden total-calcs">
+                <table class="table table-dark text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-light"> قیمت کل </th>
+                            <th class="text-light"> مجموع تخفیفات </th>
+                            <th class="text-light"> قابل پرداخت کل </th>
+                            <th class="text-light"> اعتبار هدیه کل </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="total-amount"> 0 </td>
+                            <td id="total-discount"> 0 </td>
+                            <td id="total-payable"> 0 </td>
+                            <td id="total-gift"> 0 </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
         </form>

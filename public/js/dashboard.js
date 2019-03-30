@@ -22,6 +22,7 @@ $(document).on('click', '#add-row', function () {
 $(document).on('keyup', '.first-amount, .cash-discount, .count', function () {
     var row = $(this).parents('.transaction-row');
     updateRow(row);
+    $('.total-calcs').slideDown();
 });
 
 $(document).on('click', '.delete-row', function () {
@@ -54,6 +55,50 @@ function updateRow(row) {
     row.find('.final-count').html(addCommas(count));
     row.find('.final-payable').html(addCommas(count * payableAmount));
     row.find('.final-gift').html(addCommas(count * giftAmount));
+
+    row.find('.hidden-inputs').html(null);
+    row.find('.hidden-inputs').append( '<input type="hidden" class="club-discount" name="club_discount[]" value="'+ Math.floor(count * clubDiscountAmount) +'">' );
+    row.find('.hidden-inputs').append( '<input type="hidden" class="payable-amount" name="payable_amount[]" value="'+ Math.floor(count * payableAmount) +'">' );
+    row.find('.hidden-inputs').append( '<input type="hidden" class="gift-amount" name="gift_amount[]" value="'+ Math.floor(count * giftAmount) +'">' );
+
+
+
+    totalCalcs();
+}
+
+function totalCalcs() {
+
+    // total discount
+    var totalDiscount = 0;
+    $('.cash-discount').each(function () {
+        var value = $(this).val() ? parseInt($(this).val()) : 0;
+        totalDiscount += value;
+    });
+    $('.club-discount').each(function () {
+        var value = $(this).val() ? parseInt($(this).val()) : 0;
+        totalDiscount += value;
+    });
+
+    // total gift
+    var totalGift = 0;
+    $('.gift-amount').each(function () {
+        var value = $(this).val() ? parseInt($(this).val()) : 0;
+        totalGift += value;
+    });
+
+    // total payable amount
+    var totalPayableAmount = 0;
+    $('.payable-amount').each(function () {
+        var value = $(this).val() ? parseInt($(this).val()) : 0;
+        totalPayableAmount += value;
+    });
+
+    // update table
+    $('#total-amount').html(addCommas(totalDiscount + totalPayableAmount));
+    $('#total-discount').html(addCommas(totalDiscount));
+    $('#total-payable').html(addCommas(totalPayableAmount));
+    $('#total-gift').html(addCommas(totalGift));
+
 }
 
 function addCommas(nStr) {
