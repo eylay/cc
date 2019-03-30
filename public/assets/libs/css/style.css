@@ -7092,6 +7092,13 @@ Media Query
     padding-right: 0;
 }
 
+.tooltip-inner {
+    font-family: 'Yekan';
+}
+
+.hidden {
+    display: none;
+}
 
 /* Custom, iPhone Retina */
 

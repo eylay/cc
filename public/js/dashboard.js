@@ -4,36 +4,56 @@ $(document).ready(function () {
     $('.pdp').persianDatepicker();
     $('[data-toggle=popover]').popover();
 
-    // clone transaction rows
-    $('#add-row').click(function () {
-        $('.transaction-row').clone().appendTo('#transaction-rows');
-    });
-
-    //transactions
-    $('.first-amount, .cash-discount, .count').keyup(function () {
-        updateRow();
-    });
-
-
 });
 
-function updateRow() {
+$(document).on('click', '#add-row', function () {
+    var row = $('.transaction-row').first().clone().appendTo('#transaction-rows');
+    $('.delete-row').removeClass('hidden');
+    row.find('input').val(null);
+    row.find('.cash-discount').val(0);
+    row.find('.count').val(1);
+    row.find('.final-club-discount').html(0);
+    row.find('.final-cash-discount').html(0);
+    row.find('.final-count').html(1);
+    row.find('.final-payable').html(0);
+    row.find('.final-gift').html(0);
+});
+
+$(document).on('keyup', '.first-amount, .cash-discount, .count', function () {
+    var row = $(this).parents('.transaction-row');
+    updateRow(row);
+});
+
+$(document).on('click', '.delete-row', function () {
+    var row = $(this).parents('.transaction-row');
+    row.remove();
+    var count = $('.transaction-row').length;
+    if (count == 1) {
+        $('.delete-row').addClass('hidden');
+    }
+});
+
+function updateRow(row) {
     var discountPercent = $('#new-transaction').attr('data-discount-percent');
     var giftPercent = $('#new-transaction').attr('data-gift-percent');
 
-    var firstAmount = $('.first-amount').val();
-    var count = $('.count').val() ? $('.count').val() : 0;
-    var cashDiscountAmount = $('.cash-discount').val() ? $('.cash-discount').val() : 0;
+    var firstAmount = row.find('.first-amount').val();
+    var count = row.find('.count').val();
+    var cashDiscountAmount = row.find('.cash-discount').val();
+
+    if(!firstAmount) firstAmount = 0;
+    if(!count) count = 0;
+    if(!cashDiscountAmount) cashDiscountAmount = 0;
 
     var clubDiscountAmount = (firstAmount*discountPercent) / 100;
     var payableAmount = firstAmount - clubDiscountAmount - cashDiscountAmount;
     var giftAmount = (payableAmount*giftPercent) / 100;
 
-    $('.final-club-discount').html(addCommas(count * clubDiscountAmount));
-    $('.final-cash-discount').html(addCommas(count * cashDiscountAmount));
-    $('.final-count').html(addCommas(count));
-    $('.final-payable').html(addCommas(count * payableAmount));
-    $('.final-gift').html(addCommas(count * giftAmount));
+    row.find('.final-club-discount').html(addCommas(count * clubDiscountAmount));
+    row.find('.final-cash-discount').html(addCommas(count * cashDiscountAmount));
+    row.find('.final-count').html(addCommas(count));
+    row.find('.final-payable').html(addCommas(count * payableAmount));
+    row.find('.final-gift').html(addCommas(count * giftAmount));
 }
 
 function addCommas(nStr) {

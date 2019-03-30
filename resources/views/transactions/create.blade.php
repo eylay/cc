@@ -49,15 +49,21 @@
                                 <input type="number" name="cash_discount" value="{{old('cash_discount') ?? 0}}" id="cash-discount" class="form-control cash-discount mt-2">
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="count"> تعداد </label>
                                 <input type="number" name="count" value="{{old('count') ?? 1}}" id="count" class="form-control count mt-2">
+                            </div>
+
+                            <div class="form-group col-md-2 align-self-end">
+                                <a href="javascript:void" class="delete-row hidden" title="حذف این ردیف" data-toggle="tooltip">
+                                    <i class="fa fa-trash text-danger fa-2x"></i>
+                                </a>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="col-md-7">
+                    <div class="col-md-7 align-self-center">
                         <div class="row">
                             <div class="col-md-6 p-1">
                                 <ul class="list-group p-0">
