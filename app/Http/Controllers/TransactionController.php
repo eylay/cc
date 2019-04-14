@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Transaction;
 use App\Customer;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -29,7 +30,19 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+        $result = [];
+        foreach ($inputs as $key => $array) {
+            if(is_array($array) && count($array)){
+                foreach ($array as $i => $value) {
+                    $result[$i][$key] = $value;
+                    $result[$i]['created_at'] = Carbon::now();
+                    $result[$i]['updated_at'] = Carbon::now();
+                }
+            }
+        }
+        Transaction::insert($result);
+        dd($result);
     }
 
     public function show(Transaction $transaction)

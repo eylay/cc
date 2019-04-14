@@ -58,6 +58,7 @@ function updateRow(row) {
 
     row.find('.hidden-inputs').html(null);
     row.find('.hidden-inputs').append( '<input type="hidden" class="club-discount" name="club_discount[]" value="'+ Math.floor(count * clubDiscountAmount) +'">' );
+    row.find('.hidden-inputs').append( '<input type="hidden" class="cash-discount-with-count" name="cash_discount_with_count[]" value="'+ Math.floor(count * cashDiscountAmount) +'">' );
     row.find('.hidden-inputs').append( '<input type="hidden" class="payable-amount" name="payable_amount[]" value="'+ Math.floor(count * payableAmount) +'">' );
     row.find('.hidden-inputs').append( '<input type="hidden" class="gift-amount" name="gift_amount[]" value="'+ Math.floor(count * giftAmount) +'">' );
 
@@ -70,7 +71,7 @@ function totalCalcs() {
 
     // total discount
     var totalDiscount = 0;
-    $('.cash-discount').each(function () {
+    $('.cash-discount-with-count').each(function () {
         var value = $(this).val() ? parseInt($(this).val()) : 0;
         totalDiscount += value;
     });

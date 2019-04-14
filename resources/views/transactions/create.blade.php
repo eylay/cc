@@ -41,7 +41,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="amount"> قیمت اولیه (به تومان)</label>
-                                <input type="number" name="amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2">
+                                <input type="number" name="first_amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2">
                             </div>
 
                             <div class="form-group col-md-6">
