@@ -16,14 +16,6 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id')->default(0);
-            $table->string('service')->nullable();
-            $table->unsignedInteger('count');
-            $table->unsignedBigInteger('first_amount');
-            $table->unsignedBigInteger('cash_discount');
-            $table->unsignedBigInteger('cash_discount_with_count');
-            $table->unsignedBigInteger('club_discount');
-            $table->unsignedBigInteger('payable_amount');
-            $table->unsignedBigInteger('gift_amount');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transaction;
 use App\Customer;
+use App\Item;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -18,7 +19,8 @@ class TransactionController extends Controller
 
     public function index()
     {
-        //
+        $transactions = Transaction::paginate(20);
+        return view('transactions.index', compact('transactions'));
     }
 
     public function create()
@@ -31,6 +33,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
+        $transaction = Transaction::make();
         $result = [];
         foreach ($inputs as $key => $array) {
             if(is_array($array) && count($array)){
@@ -38,11 +41,13 @@ class TransactionController extends Controller
                     $result[$i][$key] = $value;
                     $result[$i]['created_at'] = Carbon::now();
                     $result[$i]['updated_at'] = Carbon::now();
+                    $result[$i]['transaction_id'] = $transaction->id;
                 }
             }
         }
-        Transaction::insert($result);
-        dd($result);
+        Item::insert($result);
+
+        return redirect('transactions')->withMessage("تراکنش با موفقیت در سیستم ثبت شد.");
     }
 
     public function show(Transaction $transaction)
