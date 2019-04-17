@@ -33,7 +33,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        $transaction = Transaction::make();
+        $transaction = Transaction::make($request->customer_id);
         $result = [];
         foreach ($inputs as $key => $array) {
             if(is_array($array) && count($array)){

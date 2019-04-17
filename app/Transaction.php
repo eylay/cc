@@ -13,4 +13,9 @@ class Transaction extends Model
         $transaction->save();
         return $transaction;
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

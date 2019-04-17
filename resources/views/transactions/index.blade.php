@@ -9,34 +9,31 @@
                 <tr>
                     <th> # </th>
                     <th> مشتری </th>
-                    <th> تاریخ </th>
-                    <th colspan="2"> عملیات </th>
+                    <th> تاریخ و ساعت </th>
+                    <th colspan="3"> عملیات </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($transactions as $i => $transaction)
                     <tr>
                         <th> {{$i+1}} </th>
-                        <td> نام مشتری ... </td>
-                        <td> {{$transaction->created_at}} </td>
-                        <td align="center">
-                            <a href="{{url("transactions/$transaction->id/edit")}}" class="btn btn-outline-success"> ویرایش </a>
+                        <td>
+                            @if ($transaction->customer)
+                                <a href="{{url("customers/$transaction->customer_id")}}" class="text-primary">
+                                    {{$transaction->customer->user->name ?? '?' }}
+                                </a>
+                            @else
+                                <em> مشتری یافت نشد </em>
+                            @endif
                         </td>
+                        <td> {{carbon_to_jdate($transaction->created_at)}} </td>
                         <td align="center">
-                            <form action="{{url("transactions/$transaction->id")}}" method="post" id="delete-transaction-{{$transaction->id}}">
-                                @csrf
-                                @method("DELETE")
-                                <button type="button" class="btn btn-outline-danger" data-toggle="popover" data-placement="top" data-title="آیا مطمئن هستید؟" data-html="true" data-trigger="focus" tabindex="0"
-                                data-content='
-                                    <div class="p-3">
-                                        <button type="submit" form="delete-transaction-{{$transaction->id}}" class="btn btn-success mx-1"> بلی </button>
-                                        <button type="button" class="btn btn-danger mx-1"> خیر </button>
-                                    </div>
-                                '>
-                                    حذف
-                                </button>
-                            </form>
+                            <a href="{{url("transactions/$transaction->id")}}" class="btn btn-outline-primary btn-sm">
+                                <i class="fa fa-list ml-1"></i>
+                                جزییات
+                            </a>
                         </td>
+                        @include('fragments.table_actions', ['keyword' => 'transaction'])
                     </tr>
                 @endforeach
             </tbody>

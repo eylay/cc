@@ -15,10 +15,10 @@
             data-gift-percent="10" data-discount-percent="5">
             @csrf
 
-            {{-- <div class="row">
+            <div class="row">
                 <div class="form-group col-md-3 mx-auto">
                     <label for="customer"> انتخاب مشتری </label>
-                    <select class="selectpicker mt-2" name="customer_id" id="customer" data-live-search="true" title="جستجوی مشتری">
+                    <select class="selectpicker mt-2" name="customer_id" id="customer" required data-live-search="true" title="جستجوی مشتری">
                         @foreach ($customers as $customer)
                             <option value="{{$customer->id}}" @if(old('customer_id') == $customer->id) selected @endif>
                                 {{$customer->name()}} - {{$customer->mobile()}}
@@ -26,7 +26,9 @@
                         @endforeach
                     </select>
                 </div>
-            </div> --}}
+            </div>
+
+            <hr>
 
             <div id="transaction-rows">
                 <div class="row transaction-row">
@@ -41,7 +43,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="amount"> قیمت اولیه (به تومان)</label>
-                                <input type="number" name="first_amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2">
+                                <input type="number" name="first_amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2" required>
                             </div>
 
                             <div class="form-group col-md-6">
