@@ -14,9 +14,7 @@ $(document).on('click', '#add-row', function () {
     row.find('.count').val(1);
     row.find('.final-club-discount').html(0);
     row.find('.final-cash-discount').html(0);
-    row.find('.final-count').html(1);
     row.find('.final-payable').html(0);
-    row.find('.final-gift').html(0);
 });
 
 $(document).on('keyup', '.first-amount, .cash-discount, .count', function () {
@@ -52,15 +50,12 @@ function updateRow(row) {
 
     row.find('.final-club-discount').html(addCommas(count * clubDiscountAmount));
     row.find('.final-cash-discount').html(addCommas(count * cashDiscountAmount));
-    row.find('.final-count').html(addCommas(count));
     row.find('.final-payable').html(addCommas(count * payableAmount));
-    row.find('.final-gift').html(addCommas(count * giftAmount));
 
     row.find('.hidden-inputs').html(null);
     row.find('.hidden-inputs').append( '<input type="hidden" class="club-discount" name="club_discount[]" value="'+ Math.floor(count * clubDiscountAmount) +'">' );
     row.find('.hidden-inputs').append( '<input type="hidden" class="cash-discount-with-count" name="cash_discount_with_count[]" value="'+ Math.floor(count * cashDiscountAmount) +'">' );
     row.find('.hidden-inputs').append( '<input type="hidden" class="payable-amount" name="payable_amount[]" value="'+ Math.floor(count * payableAmount) +'">' );
-    row.find('.hidden-inputs').append( '<input type="hidden" class="gift-amount" name="gift_amount[]" value="'+ Math.floor(count * giftAmount) +'">' );
 
 
 
@@ -95,6 +90,7 @@ function totalCalcs() {
     // total gift
     var giftPercent = parseInt($('form#new-transaction').attr('data-gift-percent'));
     var totalGift = customerPayable * giftPercent / 100;
+    $('#transaction-gift-amount').val(totalGift);
 
     // update table
     $('#total-amount').html(addCommas(totalDiscount + totalPayableAmount));
