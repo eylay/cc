@@ -10,6 +10,7 @@
                     <th> # </th>
                     <th> نام </th>
                     <th> موبایل </th>
+                    <th> اعتبار </th>
                     <th> کد مشتری </th>
                     <th> جنسیت </th>
                     <th> تاریخ تولد </th>
@@ -22,6 +23,7 @@
                         <th> {{$i+1}} </th>
                         <td> {{$customer->user->name}} </td>
                         <td> {{$customer->user->mobile}} </td>
+                        <td> {{number_format($customer->credit)}} </td>
                         <td> {{$customer->code}} </td>
                         <td> {{$customer->gender()}} </td>
                         <td> {{print_date($customer->birthday)}} </td>

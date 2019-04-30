@@ -29,9 +29,10 @@ class Customer extends Model
         return $this->user->mobile ?? '';
     }
 
-    public function credit()
+    public function increase_credit($amount)
     {
-        return 0;
+        $this->credit += $amount;
+        $this->save();
     }
 
     public static function make($user_id, $birthday=null, $male=true)

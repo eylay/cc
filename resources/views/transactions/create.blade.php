@@ -14,7 +14,7 @@
 
     <div class="card card-body">
         <form action="{{url("transactions")}}" method="post" id="new-transaction"
-            data-gift-percent="10" data-discount-percent="5">
+            data-gift-percent="10" data-discount-percent="5" data-customer-credit="{{$customer->credit}}">
 
             @csrf
             <input type="hidden" name="step" value="{{$step}}">
@@ -52,7 +52,7 @@
                             شماره تماس مشتری : {{$customer->mobile()}}
                         </div>
                         <div class="col-md-4 my-2">
-                            اعتبار مشتری : {{$customer->credit()}}
+                            اعتبار مشتری : {{ number_format($customer->credit) }}
                         </div>
                     </div>
                 </div>
@@ -153,6 +153,7 @@
                             <th class="text-light"> قیمت کل </th>
                             <th class="text-light"> مجموع تخفیفات </th>
                             <th class="text-light"> قابل پرداخت کل </th>
+                            <th class="text-light"> دریافتی از مشتری </th>
                             <th class="text-light"> اعتبار هدیه کل </th>
                         </tr>
                     </thead>
@@ -161,6 +162,7 @@
                             <td id="total-amount"> 0 </td>
                             <td id="total-discount"> 0 </td>
                             <td id="total-payable"> 0 </td>
+                            <td id="total-customer-payable"> 0 </td>
                             <td id="total-gift"> 0 </td>
                         </tr>
                     </tbody>

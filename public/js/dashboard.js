@@ -80,13 +80,6 @@ function totalCalcs() {
         totalDiscount += value;
     });
 
-    // total gift
-    var totalGift = 0;
-    $('.gift-amount').each(function () {
-        var value = $(this).val() ? parseInt($(this).val()) : 0;
-        totalGift += value;
-    });
-
     // total payable amount
     var totalPayableAmount = 0;
     $('.payable-amount').each(function () {
@@ -94,10 +87,20 @@ function totalCalcs() {
         totalPayableAmount += value;
     });
 
+    // get customer credit
+    var customerCredit = parseInt($('form#new-transaction').attr('data-customer-credit'));
+    var customerPayable = totalPayableAmount - customerCredit;
+    customerPayable = customerPayable < 0 ? 0 : customerPayable;
+
+    // total gift
+    var giftPercent = parseInt($('form#new-transaction').attr('data-gift-percent'));
+    var totalGift = customerPayable * giftPercent / 100;
+
     // update table
     $('#total-amount').html(addCommas(totalDiscount + totalPayableAmount));
     $('#total-discount').html(addCommas(totalDiscount));
     $('#total-payable').html(addCommas(totalPayableAmount));
+    $('#total-customer-payable').html(addCommas(customerPayable));
     $('#total-gift').html(addCommas(totalGift));
 
 }
