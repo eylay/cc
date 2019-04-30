@@ -46,9 +46,7 @@
             </tbody>
         </table>
 
-        <hr>
-
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-4">
                 <div class="alert alert-info">
                     مجموع تخفیفات :

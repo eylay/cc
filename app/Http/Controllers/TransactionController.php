@@ -27,27 +27,52 @@ class TransactionController extends Controller
     {
         $transaction = new Transaction;
         $customers = Customer::all();
-        return view('transactions.create', compact('transaction', 'customers'));
+        $step = request('cid') ? 2 : 1;
+        $customer = Customer::find(request('cid'));
+        if ($step == 2 && !$customer) {
+            return redirect('transactions/create');
+        }
+        return view('transactions.create', compact('transaction', 'customers', 'customer', 'step'));
     }
 
     public function store(Request $request)
     {
-        $inputs = $request->all();
-        $transaction = Transaction::make($request->customer_id);
-        $result = [];
-        foreach ($inputs as $key => $array) {
-            if(is_array($array) && count($array)){
-                foreach ($array as $i => $value) {
-                    $result[$i][$key] = $value;
-                    $result[$i]['created_at'] = Carbon::now();
-                    $result[$i]['updated_at'] = Carbon::now();
-                    $result[$i]['transaction_id'] = $transaction->id;
+
+        if ($request->step == 1) {
+
+            if ($request->customer_id || $request->customer_code) {
+
+                $customer = $request->customer_id ? Customer::find($request->customer_id) : Customer::where('code', $request->customer_code)->first();
+                if ($customer) {
+                    return redirect("transactions/create?cid=$customer->id");
+                }else {
+                    return back()->withErrors(["مشتری با این مشخصات یافت نشد"])->withInput();
+                }
+
+            }else {
+                return back()->withErrors(["لفا یا مشتری مورد نظر را انتخاب کنید یا کد مشتری را تایپ کنید."])->withInput();
+            }
+
+        }elseif ($request->step == 2) {
+            $inputs = $request->all();
+            $transaction = Transaction::make($request->cid);
+            $result = [];
+            foreach ($inputs as $key => $array) {
+                if(is_array($array) && count($array)){
+                    foreach ($array as $i => $value) {
+                        $result[$i][$key] = $value;
+                        $result[$i]['created_at'] = Carbon::now();
+                        $result[$i]['updated_at'] = Carbon::now();
+                        $result[$i]['transaction_id'] = $transaction->id;
+                    }
                 }
             }
+            Item::insert($result);
+            return redirect('transactions')->withMessage("تراکنش با موفقیت در سیستم ثبت شد.");
+        }else {
+            return back();
         }
-        Item::insert($result);
 
-        return redirect('transactions')->withMessage("تراکنش با موفقیت در سیستم ثبت شد.");
     }
 
     public function show(Transaction $transaction)

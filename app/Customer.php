@@ -29,6 +29,11 @@ class Customer extends Model
         return $this->user->mobile ?? '';
     }
 
+    public function credit()
+    {
+        return 0;
+    }
+
     public static function make($user_id, $birthday=null, $male=true)
     {
         $code = random_string(6);

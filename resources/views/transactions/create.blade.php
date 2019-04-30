@@ -4,111 +4,145 @@
 @endsection
 @section('content')
 
-    <div class="text-center mb-3">
-        <button type="button" class="btn btn-outline-success" id="add-row">
-            <i class="fa fa-plus ml-1"></i> مورد جدید
-        </button>
-    </div>
+    @if ($step == 2)
+        <div class="text-center mb-3">
+            <button type="button" class="btn btn-outline-success" id="add-row">
+                <i class="fa fa-plus ml-1"></i> مورد جدید
+            </button>
+        </div>
+    @endif
 
     <div class="card card-body">
         <form action="{{url("transactions")}}" method="post" id="new-transaction"
             data-gift-percent="10" data-discount-percent="5">
+
             @csrf
+            <input type="hidden" name="step" value="{{$step}}">
+            <input type="hidden" name="cid" value="{{request('cid')}}">
 
-            <div class="row">
-                <div class="form-group col-md-3 mx-auto">
-                    <label for="customer"> انتخاب مشتری </label>
-                    <select class="selectpicker mt-2" name="customer_id" id="customer" required data-live-search="true" title="جستجوی مشتری">
-                        @foreach ($customers as $customer)
-                            <option value="{{$customer->id}}" @if(old('customer_id') == $customer->id) selected @endif>
-                                {{$customer->name()}} - {{$customer->mobile()}}
-                            </option>
-                        @endforeach
-                    </select>
+            @if ($step == 1)
+                <div class="row">
+                    <div class="form-group col-md-3 mr-auto">
+                        <label for="customer"> انتخاب مشتری </label>
+                        <select class="selectpicker mt-2" name="customer_id" id="customer" data-live-search="true" title="جستجوی مشتری">
+                            @foreach ($customers as $customer)
+                                <option value="{{$customer->id}}" @if(old('customer_id') == $customer->id) selected @endif>
+                                    {{$customer->name()}} - {{$customer->mobile()}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3 ml-auto">
+                        <label for="customer"> کد مشتری </label>
+                        <input type="text" name="customer_code" value="{{old('customer_code')}}" class="form-control mt-3">
+                    </div>
                 </div>
-            </div>
+                <hr>
+            @endif
 
-            <hr>
 
-            <div id="transaction-rows">
-                <div class="row transaction-row">
+            @if ($step == 2)
 
-                    <div class="col-md-5">
+                <div class="card card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4 my-2">
+                            نام مشتری : {{$customer->name()}}
+                        </div>
+                        <div class="col-md-4 my-2">
+                            شماره تماس مشتری : {{$customer->mobile()}}
+                        </div>
+                        <div class="col-md-4 my-2">
+                            اعتبار مشتری : {{$customer->credit()}}
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="service"> نام محصول یا خدمات </label>
-                                <input type="text" name="service[]" value="{{old('service')}}" id="service" class="form-control mt-2">
+                <div id="transaction-rows">
+                    <div class="row transaction-row">
+
+                        <div class="col-md-5">
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="service"> نام محصول یا خدمات </label>
+                                    <input type="text" name="service[]" value="{{old('service')}}" id="service" class="form-control mt-2">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="amount"> قیمت اولیه (به تومان)</label>
+                                    <input type="number" name="first_amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="cash-discount"> تخفیف نقدی </label>
+                                    <input type="number" name="cash_discount[]" value="{{old('cash_discount') ?? 0}}" id="cash-discount" class="form-control cash-discount mt-2">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="count"> تعداد </label>
+                                    <input type="number" name="count[]" value="{{old('count') ?? 1}}" id="count" class="form-control count mt-2">
+                                </div>
+
+                                <div class="form-group col-md-2 align-self-end">
+                                    <a href="javascript:void" class="delete-row hidden" title="حذف این ردیف" data-toggle="tooltip">
+                                        <i class="fa fa-trash text-danger fa-2x"></i>
+                                    </a>
+                                </div>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="amount"> قیمت اولیه (به تومان)</label>
-                                <input type="number" name="first_amount[]" value="{{old('amount')}}" id="amount" class="form-control first-amount mt-2" required>
-                            </div>
+                        </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="cash-discount"> تخفیف نقدی </label>
-                                <input type="number" name="cash_discount[]" value="{{old('cash_discount') ?? 0}}" id="cash-discount" class="form-control cash-discount mt-2">
-                            </div>
+                        <div class="col-md-7 align-self-center">
+                            <div class="row">
+                                <div class="col-md-6 p-1">
+                                    <ul class="list-group p-0">
+                                        <li class="list-group-item list-group-item-info">
+                                            تخفیف :
+                                            <span class="final-club-discount" title="تخفیف باشگاه مشتریان" data-toggle="tooltip"> 0 </span>
+                                            <i class="fa fa-plus text-primary"></i>
+                                            <span class="final-cash-discount" title="تخفیف نقدی" data-toggle="tooltip"> 0 </span>
+                                            تومان
 
-                            <div class="form-group col-md-4">
-                                <label for="count"> تعداد </label>
-                                <input type="number" name="count[]" value="{{old('count') ?? 1}}" id="count" class="form-control count mt-2">
-                            </div>
-
-                            <div class="form-group col-md-2 align-self-end">
-                                <a href="javascript:void" class="delete-row hidden" title="حذف این ردیف" data-toggle="tooltip">
-                                    <i class="fa fa-trash text-danger fa-2x"></i>
-                                </a>
+                                        </li>
+                                        <li class="list-group-item list-group-item-info">
+                                            تعداد : <span class="final-count"> 1 </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 p-1">
+                                    <ul class="list-group p-0">
+                                        <li class="list-group-item list-group-item-info">
+                                            قابل پرداخت : <span class="final-payable"> 0 </span> تومان
+                                        </li>
+                                        <li class="list-group-item list-group-item-info">
+                                            اعتبار هدیه : <span class="final-gift"> 0 </span> تومان
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
-                    </div>
+                        <hr class="w-100">
 
-                    <div class="col-md-7 align-self-center">
-                        <div class="row">
-                            <div class="col-md-6 p-1">
-                                <ul class="list-group p-0">
-                                    <li class="list-group-item list-group-item-info">
-                                        تخفیف :
-                                        <span class="final-club-discount" title="تخفیف باشگاه مشتریان" data-toggle="tooltip"> 0 </span>
-                                        <i class="fa fa-plus text-primary"></i>
-                                        <span class="final-cash-discount" title="تخفیف نقدی" data-toggle="tooltip"> 0 </span>
-                                        تومان
-
-                                    </li>
-                                    <li class="list-group-item list-group-item-info">
-                                        تعداد : <span class="final-count"> 1 </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6 p-1">
-                                <ul class="list-group p-0">
-                                    <li class="list-group-item list-group-item-info">
-                                        قابل پرداخت : <span class="final-payable"> 0 </span> تومان
-                                    </li>
-                                    <li class="list-group-item list-group-item-info">
-                                        اعتبار هدیه : <span class="final-gift"> 0 </span> تومان
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="hidden-inputs" class="hidden">
+                            {{-- will be updated via jquery --}}
+                            <input type="hidden" class="club-discount" name="club_discount[]" value="0">
+                            <input type="hidden" class="payable-amount" name="payable_amount[]" value="0">
+                            <input type="hidden" class="gift-amount" name="gift_amount[]" value="0">
                         </div>
                     </div>
-
-                    <hr class="w-100">
-
-                    <div class="hidden-inputs" class="hidden">
-                        {{-- will be updated via jquery --}}
-                        <input type="hidden" class="club-discount" name="club_discount[]" value="0">
-                        <input type="hidden" class="payable-amount" name="payable_amount[]" value="0">
-                        <input type="hidden" class="gift-amount" name="gift_amount[]" value="0">
-                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="row">
                 <div class="col-md-2 mx-auto">
-                    <button type="submit" class="btn btn-primary btn-block"> ثبت تراکنش </button>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        @if ($step == 1)
+                            جستجوی مشتری
+                        @else
+                            ثبت تراکنش
+                        @endif
+                    </button>
                 </div>
             </div>
 
