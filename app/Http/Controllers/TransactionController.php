@@ -56,7 +56,7 @@ class TransactionController extends Controller
         }elseif ($request->step == 2) {
             $inputs = $request->all();
             $customer = Customer::find($request->cid);
-            $transaction = Transaction::make($request->cid, $request->gift_amount);
+            $transaction = Transaction::make($inputs);
             $result = [];
             foreach ($inputs as $key => $array) {
                 if(is_array($array) && count($array)){
@@ -69,7 +69,12 @@ class TransactionController extends Controller
                 }
             }
             Item::insert($result);
-            $customer->increase_credit($request->gift_amount);
+            if ($request->transaction_gift_amount > 0) {
+                $customer->increase_credit($request->transaction_gift_amount);
+            }
+            if ($request->transaction_gift_spent > 0) {
+                $customer->reduce_credit($request->transaction_gift_spent);
+            }
             return redirect('transactions')->withMessage("تراکنش با موفقیت در سیستم ثبت شد.");
         }else {
             return back();

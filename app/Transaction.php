@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    public static function make($customer_id=0, $gift_amount=0)
+    public static function make($array)
     {
         $transaction = new self;
-        $transaction->customer_id = $customer_id;
-        $transaction->gift_amount = $gift_amount;
+        $transaction->customer_id = $array['cid'];
+        $transaction->gift_amount = $array['transaction_gift_amount'];
+        $transaction->gift_spent = $array['transaction_gift_spent'];
+        $transaction->received_amount = $array['transaction_received_amount'];
+        $transaction->payable_amount = $array['transaction_payable_amount'];
+        $transaction->discount_amount = $array['transaction_discount_amount'];
+        $transaction->total_amount = $array['transaction_total_amount'];
         $transaction->save();
         return $transaction;
     }

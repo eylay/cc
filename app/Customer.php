@@ -35,6 +35,12 @@ class Customer extends Model
         $this->save();
     }
 
+    public function reduce_credit($amount)
+    {
+        $this->credit -= $amount;
+        $this->save();
+    }
+
     public static function make($user_id, $birthday=null, $male=true)
     {
         $code = random_string(6);

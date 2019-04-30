@@ -90,13 +90,21 @@ function totalCalcs() {
     // total gift
     var giftPercent = parseInt($('form#new-transaction').attr('data-gift-percent'));
     var totalGift = customerPayable * giftPercent / 100;
+
+    //update hidden inputs
     $('#transaction-gift-amount').val(totalGift);
+    $('#transaction-total-amount').val(totalDiscount + totalPayableAmount);
+    $('#transaction-discount-amount').val(totalDiscount);
+    $('#transaction-payable-amount').val(totalPayableAmount);
+    $('#transaction-received-amount').val(customerPayable);
+    $('#transaction-gift-spent').val(totalPayableAmount - customerPayable);
 
     // update table
     $('#total-amount').html(addCommas(totalDiscount + totalPayableAmount));
     $('#total-discount').html(addCommas(totalDiscount));
     $('#total-payable').html(addCommas(totalPayableAmount));
     $('#total-customer-payable').html(addCommas(customerPayable));
+    $('#total-spent-gift').html(addCommas(totalPayableAmount - customerPayable));
     $('#total-gift').html(addCommas(totalGift));
 
 }

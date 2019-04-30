@@ -19,7 +19,12 @@
             @csrf
             <input type="hidden" name="step" value="{{$step}}">
             <input type="hidden" name="cid" value="{{request('cid')}}">
-            <input type="hidden" name="gift_amount" value="0" id="transaction-gift-amount">
+            <input type="hidden" name="transaction_gift_amount" value="0" id="transaction-gift-amount">
+            <input type="hidden" name="transaction_gift_spent" value="0" id="transaction-gift-spent">
+            <input type="hidden" name="transaction_received_amount" value="0" id="transaction-received-amount">
+            <input type="hidden" name="transaction_payable_amount" value="0" id="transaction-payable-amount">
+            <input type="hidden" name="transaction_discount_amount" value="0" id="transaction-discount-amount">
+            <input type="hidden" name="transaction_total_amount" value="0" id="transaction-total-amount">
 
             @if ($step == 1)
                 <div class="row">
@@ -140,7 +145,8 @@
                             <th class="text-light"> مجموع تخفیفات </th>
                             <th class="text-light"> قابل پرداخت کل </th>
                             <th class="text-light"> دریافتی از مشتری </th>
-                            <th class="text-light"> اعتبار هدیه کل </th>
+                            <th class="text-light"> اعتبار خرج شده </th>
+                            <th class="text-light"> اعتبار هدیه </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,6 +155,7 @@
                             <td id="total-discount"> 0 </td>
                             <td id="total-payable"> 0 </td>
                             <td id="total-customer-payable"> 0 </td>
+                            <td id="total-spent-gift"> 0 </td>
                             <td id="total-gift"> 0 </td>
                         </tr>
                     </tbody>

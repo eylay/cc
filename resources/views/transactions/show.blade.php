@@ -27,7 +27,6 @@
                     <th> تخفیف نقدی </th>
                     <th> تخفیف باشگاه مشتریان </th>
                     <th> قابل پرداخت </th>
-                    <th> اعتبار هدیه </th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +39,6 @@
                         <td> {{number_format($item->cash_discount_with_count)}} </td>
                         <td> {{number_format($item->club_discount)}} </td>
                         <td> {{number_format($item->payable_amount)}} </td>
-                        <td> {{number_format($item->gift_amount)}} </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -50,19 +48,19 @@
             <div class="col-md-4">
                 <div class="alert alert-info">
                     مجموع تخفیفات :
-                    {{ number_format($transaction->total_discount()) }}
+                    {{ number_format($transaction->discount_amount) }}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="alert alert-success">
                     دریافتی :
-                    {{ number_format($transaction->total_payable()) }}
+                    {{ number_format($transaction->received_amount) }}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="alert alert-warning">
                     اعتبار هدیه :
-                    {{ number_format($transaction->total_gift()) }}
+                    {{ number_format($transaction->gift_amount) }}
                 </div>
             </div>
         </div>
