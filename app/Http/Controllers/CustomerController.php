@@ -37,7 +37,7 @@ class CustomerController extends Controller
         $new_user = User::new_user($request->name, $request->mobile, $password);
 
         // ثبت مشتری در دیتابیس
-        $new_customer = Customer::make($new_user->id, $request->birthday, $request->male);
+        $new_customer = Customer::make($new_user->id, $request->birthday, $request->male, $request->credit);
 
         // ارسال پیامک به مشتری و اطلاع رسانی
         $message_body = "
@@ -93,6 +93,7 @@ class CustomerController extends Controller
         return request()->validate([
             'name' => 'required|string|min:3|max:200',
             'mobile' => 'required|string|digits:11|unique:users,mobile,'.$user_id,
+            'credit' => 'nullable',
             'birthday' => 'nullable',
             'male' => 'nullable',
         ]);

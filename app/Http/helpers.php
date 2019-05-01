@@ -6,6 +6,18 @@ function user_type()
     return $user ? ($user->admin ? 'admin' : 'customer') : '';
 }
 
+function admin()
+{
+    $user = auth()->user();
+    return $user && $user->admin;
+}
+
+function current_customer()
+{
+    $user = auth()->user();
+    return $user && !$user->admin ? $user->customer : null;
+}
+
 function shamsi_to_miladi($string, $sep='/')
 {
     if ($string) {

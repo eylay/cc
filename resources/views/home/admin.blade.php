@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    ddd
+    داشبرد ادمین
 @endsection

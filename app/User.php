@@ -34,6 +34,11 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
+
     public static function new_user($name, $mobile, $password)
     {
         $user = new self;

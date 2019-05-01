@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Schema::defaultStringLength(191);
+        \Blade::if('admin', function () {
+            return admin();
+        });
     }
 }

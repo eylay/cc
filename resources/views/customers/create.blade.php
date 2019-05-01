@@ -20,15 +20,19 @@
                 @method('PUT')
             @endif
 
-            <div class="col-md-4 form-group">
+            <div class="col-md-3 form-group">
                 <label for="name"> نام مشتری </label>
                 <input type="text" name="name" value="{{old('name') ?? $customer->user->name ?? null}}" id="name" class="form-control">
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-3 form-group">
                 <label for="mobile"> موبایل </label>
                 <input type="text" name="mobile" value="{{old('mobile') ?? $customer->user->mobile ?? null}}" id="mobile" class="form-control">
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-3 form-group">
+                <label for="credit"> اعتبار اولیه </label>
+                <input type="number" name="credit" value="{{old('credit') ?? $customer->credit ?? null}}" id="credit" class="form-control">
+            </div>
+            <div class="col-md-3 form-group">
                 <label for="birthday"> تاریخ تولد </label>
                 <input type="text" name="birthday" value="{{old('birthday') ?? $customer->birthday ? pdp($customer->birthday) : null}}" id="birthday" class="form-control pdp" autocomplete="off">
             </div>

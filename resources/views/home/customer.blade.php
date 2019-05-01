@@ -1,23 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+
+@section('meta')
+    <title> داشبرد ادمین </title>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in as <strong>Customer</strong>!
-                </div>
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="card card-body text-center">
+                <h3> اعتبار شما </h3>
+                <span class="badge badge-info py-3"> {{number_format(current_customer()->credit ?? 0)}} </span>
             </div>
         </div>
     </div>
-</div>
 @endsection

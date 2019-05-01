@@ -14,12 +14,17 @@ class TransactionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware('admin')->except('index');
     }
 
     public function index()
     {
-        $transactions = Transaction::paginate(20);
+        if (admin()) {
+            $transactions = Transaction::paginate(20);
+        }else {
+            $current_customer_id = current_customer()->id ?? 0;
+            $transactions = Transaction::where('customer_id', $current_customer_id)->paginate(20);
+        }
         return view('transactions.index', compact('transactions'));
     }
 

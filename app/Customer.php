@@ -41,7 +41,7 @@ class Customer extends Model
         $this->save();
     }
 
-    public static function make($user_id, $birthday=null, $male=true)
+    public static function make($user_id, $birthday=null, $male=true, $credit=0)
     {
         $code = random_string(6);
         $customer = new self;
@@ -49,6 +49,7 @@ class Customer extends Model
         $customer->birthday = shamsi_to_miladi($birthday);
         $customer->code = $code;
         $customer->male = $male;
+        $customer->credit = $credit;
         $customer->save();
         return $customer;
     }
