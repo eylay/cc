@@ -13,7 +13,13 @@ class TextMessageController extends Controller
         $this->middleware('auth');
         $this->middleware('admin');
     }
-    
+
+
+    public function test()
+    {
+        Sms::send();
+    }
+
     public function index()
     {
         $messages = TextMessage::latest()->paginate(25);
