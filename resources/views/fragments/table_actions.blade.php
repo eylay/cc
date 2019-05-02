@@ -1,9 +1,11 @@
-<td align="center">
-    <a href="{{url("{$keyword}s/{$$keyword->id}/edit")}}" class="btn btn-outline-success btn-sm">
-        <i class="fa fa-edit ml-1"></i>
-        ویرایش
-    </a>
-</td>
+@if(!isset($no_edit) || $no_edit===false)
+    <td align="center">
+        <a href="{{url("{$keyword}s/{$$keyword->id}/edit")}}" class="btn btn-outline-success btn-sm">
+            <i class="fa fa-edit ml-1"></i>
+            ویرایش
+        </a>
+    </td>
+@endif
 <td align="center">
     <form action="{{url("{$keyword}s/{$$keyword->id}")}}" method="post" id="delete-{{$keyword}}-{{$$keyword->id}}">
         @csrf

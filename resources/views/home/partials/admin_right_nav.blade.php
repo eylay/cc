@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a href="{{url("settings/edit")}}" class="nav-link"> <i class="fa fa-cogs"></i> تنظیمات </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{url("text-messages")}}" class="nav-link"> <i class="fa fa-envelope"></i> لیست پیامک های ارسالی </a>
+                    </li>
                 </ul>
             </div>
         </nav>
