@@ -14,12 +14,6 @@ class TextMessageController extends Controller
         $this->middleware('admin');
     }
 
-
-    public function test()
-    {
-        Sms::send();
-    }
-
     public function index()
     {
         $messages = TextMessage::latest()->paginate(25);
@@ -34,8 +28,7 @@ class TextMessageController extends Controller
 
     public static function send($mobile, $body)
     {
-        // TODO: send the text message
-
+        Sms::send($body,$mobile);
         TextMessage::create([
             'mobile' => $mobile,
             'body' => $body,

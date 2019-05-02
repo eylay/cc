@@ -9,12 +9,10 @@ use Kavenegar\Exceptions\HttpException;
 class Sms extends Controller
 {
 
-    public static function send()
+    public static function send($message, $receptor)
     {
         try{
             $sender = "";
-            $message = "send from laravel";
-            $receptor = "09185567663";
             $result = Kavenegar::Send($sender,$receptor,$message);
         }
         catch(ApiException $e){

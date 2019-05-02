@@ -26,4 +26,3 @@ Route::post('settings/update', 'SettingController@update');
 // text messages
 Route::get('text-messages', 'TextMessageController@index');
 Route::delete('messages/{message}', 'TextMessageController@destroy');
-Route::get('test', 'TextMessageController@test');
