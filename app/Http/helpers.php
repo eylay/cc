@@ -61,3 +61,9 @@ function random_string($length)
         $x='123456789ABCDEFGHJKMNPQRSTUVWXYZ', ceil($length/strlen($x))
     )),1,$length);
 }
+
+function settings($col)
+{
+    $setting = \App\Setting::first();
+    return $setting ? $setting->$col : 0 ;
+}

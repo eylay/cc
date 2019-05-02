@@ -14,7 +14,10 @@
 
     <div class="card card-body">
         <form action="{{url("transactions")}}" method="post" id="new-transaction"
-            data-gift-percent="10" data-discount-percent="5" data-customer-credit="{{$customer->credit ?? 0}}">
+            data-gift-percent="{{settings('gift_percent')}}"
+            data-discount-percent="{{settings('discount_percent')}}"
+            data-customer-credit="{{$customer->credit ?? 0}}"
+            >
 
             @csrf
             <input type="hidden" name="step" value="{{$step}}">

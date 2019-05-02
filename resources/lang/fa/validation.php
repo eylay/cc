@@ -24,7 +24,7 @@ return [
     'before' => 'The :attribute must be a date before :date.',
     'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
     'between' => [
-        'numeric' => 'The :attribute must be between :min and :max.',
+        'numeric' => ':attribute باید بین :min و :max باشد.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
         'string' => 'The :attribute must be between :min and :max characters.',
         'array' => 'The :attribute must have between :min and :max items.',
@@ -150,6 +150,8 @@ return [
         'name' => 'نام',
         'new_password' => 'رمز عبور جدید',
         'current_password' => 'رمز عبور فعلی',
+        'discount_percent' => 'تخفیف باشگاه مشتریان',
+        'gift_percent' => 'اعتبار هدیه باشگاه مشتریان',
     ],
 
 ];

@@ -37,6 +37,9 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{url("settings/edit")}}" class="nav-link"> <i class="fa fa-cogs"></i> تنظیمات </a>
+                    </li>
                 </ul>
             </div>
         </nav>

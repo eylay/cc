@@ -14,6 +14,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/acc', 'UserController@acc')->name('acc');
 Route::post('/acc', 'UserController@update');
 
+
 // resouce controllers
 Route::resource('customers', 'CustomerController');
 Route::resource('transactions', 'TransactionController');
+
+// settings
+Route::get('settings/edit', 'SettingController@edit');
+Route::post('settings/update', 'SettingController@update');
