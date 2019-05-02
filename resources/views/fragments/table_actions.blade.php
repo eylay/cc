@@ -5,7 +5,7 @@
     </a>
 </td>
 <td align="center">
-    <form action="{{url("{$keyword}s/{$$keyword->id}")}}" method="post" id="delete-$keyword-{{$$keyword->id}}">
+    <form action="{{url("{$keyword}s/{$$keyword->id}")}}" method="post" id="delete-{{$keyword}}-{{$$keyword->id}}">
         @csrf
         @method("DELETE")
         <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="popover" data-placement="top" data-title="آیا مطمئن هستید؟" data-html="true" data-trigger="focus" tabindex="0"

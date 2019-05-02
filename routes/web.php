@@ -17,7 +17,7 @@ Route::post('/acc', 'UserController@update');
 
 // resouce controllers
 Route::resource('customers', 'CustomerController');
-Route::resource('transactions', 'TransactionController');
+Route::resource('transactions', 'TransactionController')->except(['edit', 'update']);
 
 // settings
 Route::get('settings/edit', 'SettingController@edit');

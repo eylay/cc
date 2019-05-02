@@ -11,7 +11,7 @@
             <th> اعتبار خرج شده </th>
             <th> اعتبار هدیه </th>
             <th> تاریخ و ساعت </th>
-            <th colspan="3"> عملیات </th>
+            <th colspan="2"> عملیات </th>
         </tr>
     </thead>
     <tbody>
@@ -42,7 +42,22 @@
                     </a>
                 </td>
                 @admin
-                    @include('fragments.table_actions', ['keyword' => 'transaction'])
+                    <td align="center">
+                        <form action="{{url("transactions/$transaction->id")}}" method="post" id="delete-transaction-{{$transaction->id}}">
+                            @csrf
+                            @method("DELETE")
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="popover" data-placement="top" data-title="آیا مطمئن هستید؟" data-html="true" data-trigger="focus" tabindex="0"
+                            data-content='
+                                <div class="p-3">
+                                    <button type="submit" form="delete-transaction-{{$transaction->id}}" class="btn btn-warning mx-1"> بلی </button>
+                                    <button type="button" class="btn btn-info mx-1"> خیر </button>
+                                </div>
+                            '>
+                                <i class="fa fa-reply ml-1"></i>
+                                مرجوع کردن
+                            </button>
+                        </form>
+                    </td>
                 @endadmin
             </tr>
         @endforeach

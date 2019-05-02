@@ -93,18 +93,15 @@ class TransactionController extends Controller
         return view('transactions.show', compact('transaction'));
     }
 
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
-
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
-
     public function destroy(Transaction $transaction)
     {
-        //
+        $customer = Customer::find($transaction->customer_id);
+        if ($customer) {
+            $customer->increase_credit($transaction->gift_spent);
+            $customer->reduce_credit($transaction->gift_amount);
+        }
+        \DB::table('items')->where('transaction_id', $transaction->id)->delete();
+        $transaction->delete();
+        return back()->withMessage('تراکنش مورد نظر با موفقیت مرجوع شد.');
     }
 }
