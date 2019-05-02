@@ -18,6 +18,16 @@ function current_customer()
     return $user && !$user->admin ? $user->customer : null;
 }
 
+function customer_check($object)
+{
+    if (!admin()) {
+        $customer_id = current_customer()->id;
+        if ($object->customer_id != $customer_id) {
+            abort(404);
+        }
+    }
+}
+
 function shamsi_to_miladi($string, $sep='/')
 {
     if ($string) {

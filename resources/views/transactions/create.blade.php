@@ -49,19 +49,7 @@
 
             @if ($step == 2)
 
-                <div class="card card-body">
-                    <div class="row text-center">
-                        <div class="col-md-4 my-2">
-                            نام مشتری : {{$customer->name()}}
-                        </div>
-                        <div class="col-md-4 my-2">
-                            شماره تماس مشتری : {{$customer->mobile()}}
-                        </div>
-                        <div class="col-md-4 my-2">
-                            اعتبار مشتری : {{ number_format($customer->credit) }}
-                        </div>
-                    </div>
-                </div>
+                @include('customers.partials.customer_details')
 
                 <div id="transaction-rows">
                     <div class="row transaction-row">

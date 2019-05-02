@@ -14,7 +14,7 @@ class TransactionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin')->except('index');
+        $this->middleware('admin')->except(['index','show']);
     }
 
     public function index()
@@ -89,6 +89,7 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
+        customer_check($transaction);
         return view('transactions.show', compact('transaction'));
     }
 

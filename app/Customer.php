@@ -41,6 +41,11 @@ class Customer extends Model
         $this->save();
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public static function make($user_id, $birthday=null, $male=true, $credit=0)
     {
         $code = random_string(6);

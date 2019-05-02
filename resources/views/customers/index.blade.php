@@ -21,8 +21,8 @@
                 @foreach ($customers as $i => $customer)
                     <tr>
                         <th> {{$i+1}} </th>
-                        <td> {{$customer->user->name}} </td>
-                        <td> {{$customer->user->mobile}} </td>
+                        <td> <a href="{{url("customers/$customer->id")}}" class="text-primary"> {{$customer->name()}} </a> </td>
+                        <td> {{$customer->mobile()}} </td>
                         <td> {{number_format($customer->credit)}} </td>
                         <td> {{$customer->code}} </td>
                         <td> {{$customer->gender()}} </td>
