@@ -45,14 +45,14 @@
                     <ul class="navbar-nav mr-auto p-0 pl-4 navbar-right-top">
                         <li class="nav-item">
                             <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="text" placeholder="Search..">
+                                <input class="form-control" type="text" placeholder="جست و جو...">
                             </div>
                         </li>
                         <li class="nav-item dropdown notification">
                             <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>
                             <ul class="dropdown-menu text-right notification-dropdown">
                                 <li>
-                                    <div class="notification-title"> Notification</div>
+                                    <div class="notification-title"> رویداد ها </div>
                                     <div class="notification-list">
                                         <div class="list-group">
                                             <a href="#" class="list-group-item list-group-item-action active">
@@ -93,7 +93,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                    <div class="list-footer"> <a href="#"> مشاهده همه رویداد ها </a></div>
                                 </li>
                             </ul>
                         </li>
@@ -117,7 +117,7 @@
                                             <a href="#" class="connection-item"><span>Bitbucket</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
-                                            <a href="#" class="connection-item">pan>Mail chimp</span></a>
+                                            <a href="#" class="connection-item"><span>Mail chimp</span></a>
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                             <a href="#" class="connection-item"><span>Slack</span></a>
@@ -125,7 +125,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="conntection-footer"><a href="#">More</a></div>
+                                    <div class="conntection-footer"><a href="#"> داشبرد </a></div>
                                 </li>
                             </ul>
                         </li>
